@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beyond Footwear</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #EDECEA;
+      --bg-card: #E4E2DF;
+      --black: #111110;
+      --mid: #6B6965;
+      --border: rgba(17,17,16,0.12);
+      --border-strong: rgba(17,17,16,0.22);
+      --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--black);
+      font-family: var(--sans);
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(237,236,234,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--black); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 3.5rem;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 5rem 3rem 4.5rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.66rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+    }
+
+    .hero-title {
+      font-size: clamp(4rem, 6.5vw, 7.5rem);
+      font-weight: 200;
+      line-height: 0.93;
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-desc {
+      font-size: 0.88rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--mid);
+      max-width: 36ch;
+      margin-bottom: 3rem;
+    }
+
+    .btn {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 0.8rem 2rem;
+      font-size: 0.67rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background: var(--black);
+      border: 1px solid var(--black);
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .btn:hover { background: transparent; color: var(--black); }
+
+    .hero-right {
+      overflow: hidden;
+      background: #DDDBD7;
+    }
+
+    .hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* DIVIDER */
+    .divider { height: 1px; background: var(--border); margin: 0 3rem; }
+
+    /* SECTIONS */
+    .section { padding: 7rem 3rem; }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      margin-bottom: 4rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-num {
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 200;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-body {
+      font-size: 0.93rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--mid);
+    }
+
+    .about-body p + p { margin-top: 1.25em; }
+
+    .about-values { display: flex; flex-direction: column; }
+
+    .value-item {
+      padding: 1.4rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 2rem 1fr;
+      gap: 1.25rem;
+    }
+
+    .value-item:first-child { border-top: 1px solid var(--border); }
+
+    .value-num {
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      color: var(--mid);
+      padding-top: 0.25em;
+    }
+
+    .value-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      margin-bottom: 0.35rem;
+    }
+
+    .value-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: var(--mid);
+      line-height: 1.65;
+    }
+
+    /* COLLECTION */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin: 0 3rem 7rem;
+    }
+
+    .shoe-card {
+      background: var(--bg);
+      padding: 2.5rem 2rem 2rem;
+      transition: background 0.3s;
+    }
+
+    .shoe-card:hover { background: #E2E0DC; }
+
+    .shoe-card-num {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 1.75rem;
+    }
+
+    .shoe-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      opacity: 0.3;
+    }
+
+    .shoe-name {
+      font-size: 1.6rem;
+      font-weight: 200;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 0.75rem;
+    }
+
+    .shoe-slogan {
+      font-size: 0.85rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--black);
+      margin-bottom: 0.75rem;
+    }
+
+    .shoe-desc {
+      font-size: 0.8rem;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--mid);
+    }
+
+    .shoe-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1.5rem;
+    }
+
+    .tag {
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.28rem 0.6rem;
+      border: 1px solid var(--border-strong);
+      color: var(--mid);
+    }
+
+    /* TEAM */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .team-photo {
+      width: 72px;
+      height: 72px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.25rem;
+    }
+
+    .team-name {
+      font-size: 0.95rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+
+    .team-role {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+    }
+
+    .team-degree {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--mid);
+      margin-top: 0.2rem;
+    }
+
+    .social-links { display: flex; gap: 0.4rem; margin-top: 1rem; }
+
+    .social-btn {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.63rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      padding: 0.32rem 0.65rem;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .social-btn:hover {
+      color: var(--black);
+      border-color: var(--black);
+      background: rgba(17,17,16,0.04);
+    }
+
+    /* CAROUSEL */
+    .carousel {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+    }
+
+    .carousel-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .carousel-img {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(237,236,234,0.85);
+      border: 1px solid var(--border-strong);
+      color: var(--black);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s;
+      z-index: 2;
+    }
+
+    .carousel-btn:hover { background: rgba(255,255,255,0.95); }
+    .carousel-btn.prev { left: 0.6rem; }
+    .carousel-btn.next { right: 0.6rem; }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 0.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(17,17,16,0.25);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .dot.active { background: var(--black); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--mid);
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-up { opacity: 0; animation: fadeUp 1s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.25s; }
+    .delay-3 { animation-delay: 0.4s; }
+    .delay-4 { animation-delay: 0.55s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1.1rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 6rem 1.5rem 3rem; }
+      .hero-right { height: 65vw; min-height: 260px; }
+      .section { padding: 4rem 1.5rem; }
+      .divider { margin: 0 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .collection-grid { grid-template-columns: 1fr; margin: 0 1.5rem 4rem; }
+      .team-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <span class="nav-logo">Beyond Footwear</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#team">Team</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow fade-up">Exhibition Road Festival · 2026</p>
+      <h1 class="hero-title fade-up delay-1">Beyond<br>Footwear</h1>
+      <p class="hero-desc fade-up delay-2">
+        Exploring how footwear can move beyond fashion to address real-world needs through sustainability, safety, and performance-driven innovation.
+      </p>
+      <a href="#collection" class="btn fade-up delay-3">View the Collection</a>
+    </div>
+    <div class="hero-right fade-up delay-1">
+      <img src="hero-image.jpg" alt="The Four Seasons, Breakaway, and BioStride on display" />
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section" id="about">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The Concept</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>Beyond Footwear is an exhibition born from a question: what if shoes did more than protect your feet or complete an outfit? What if they responded to the environment, supported the body, and were made with the planet in mind?</p>
+        <p>Each of the three designs in this collection takes a distinct approach — one centered on nature's rhythms, one on personal safety, one on closed-loop sustainability — but all share a commitment to purposeful design.</p>
+        <p>This project challenges the conventions of footwear design and asks us to imagine a future where what we wear on our feet reflects our values.</p>
+      </div>
+      <div class="about-values">
+        <div class="value-item">
+          <span class="value-num">A</span>
+          <div>
+            <p class="value-name">Sustainability</p>
+            <p class="value-desc">Materials and processes chosen with environmental responsibility at the forefront.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-num">B</span>
+          <div>
+            <p class="value-name">Safety</p>
+            <p class="value-desc">Design that protects and supports the human body in real-world conditions.</p>
+          </div>
+        </div>
+        <div class="value-item">
+          <span class="value-num">C</span>
+          <div>
+            <p class="value-name">Performance</p>
+            <p class="value-desc">Innovation that elevates what footwear can do — functionally and experientially.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="collection">
+    <div class="section" style="padding-bottom: 2rem;">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">The Collection</h2>
+      </div>
+    </div>
+    <div class="collection-grid">
+
+      <div class="shoe-card">
+        <p class="shoe-card-num">Design 01</p>
+        <div class="carousel" id="carousel-tfs">
+          <div class="carousel-track">
+            <img src="tfs_1.png" alt="The Four Seasons" class="carousel-img" />
+            <img src="tfs_2.png" alt="The Four Seasons — exploded view" class="carousel-img" />
+            <img src="tfs_3.jpg" alt="The Four Seasons — sole detail" class="carousel-img" />
+            <img src="tfs_4.png" alt="The Four Seasons — in use" class="carousel-img" />
+          </div>
+          <button class="carousel-btn prev" onclick="moveCarousel('carousel-tfs', -1)">&#8592;</button>
+          <button class="carousel-btn next" onclick="moveCarousel('carousel-tfs', 1)">&#8594;</button>
+          <div class="carousel-dots" id="dots-tfs">
+            <span class="dot active" onclick="goToSlide('carousel-tfs', 0)"></span>
+            <span class="dot" onclick="goToSlide('carousel-tfs', 1)"></span>
+            <span class="dot" onclick="goToSlide('carousel-tfs', 2)"></span>
+            <span class="dot" onclick="goToSlide('carousel-tfs', 3)"></span>
+          </div>
+        </div>
+        <h3 class="shoe-name">The Four Seasons</h3>
+        <p class="shoe-slogan">Dig in without the ache.</p>
+        <p class="shoe-desc">A gardening shoe engineered to reduce gardening-related injuries through a highly innovative multi-surface, puncture-proof sole. Lightweight materials and phase-changing material technology keep it comfortable all day. Its lug-patterned sole features varied shapes and channels designed for traction across surfaces and weather conditions.</p>
+        <div class="shoe-tags">
+          <span class="tag">Puncture-proof</span>
+          <span class="tag">Multi-surface</span>
+          <span class="tag">Lightweight</span>
+          <span class="tag">Injury prevention</span>
+        </div>
+      </div>
+
+      <div class="shoe-card">
+        <p class="shoe-card-num">Design 02</p>
+        <div class="carousel" id="carousel-ba">
+          <div class="carousel-track">
+            <img src="ba_1.png" alt="Breakaway" class="carousel-img" />
+            <img src="ba_2.png" alt="Breakaway — exploded view" class="carousel-img" />
+            <img src="ba_3.jpg" alt="Breakaway — emergency panic button" class="carousel-img" />
+            <img src="ba_4.png" alt="Breakaway — night render" class="carousel-img" />
+          </div>
+          <button class="carousel-btn prev" onclick="moveCarousel('carousel-ba', -1)">&#8592;</button>
+          <button class="carousel-btn next" onclick="moveCarousel('carousel-ba', 1)">&#8594;</button>
+          <div class="carousel-dots" id="dots-ba">
+            <span class="dot active" onclick="goToSlide('carousel-ba', 0)"></span>
+            <span class="dot" onclick="goToSlide('carousel-ba', 1)"></span>
+            <span class="dot" onclick="goToSlide('carousel-ba', 2)"></span>
+            <span class="dot" onclick="goToSlide('carousel-ba', 3)"></span>
+          </div>
+        </div>
+        <h3 class="shoe-name">Breakaway</h3>
+        <p class="shoe-slogan">Safe. Secure. Supported.</p>
+        <p class="shoe-desc">Rethinking women's footwear to interconnect personal safety with bunion support. Breakaway gives women a hands-free way to illuminate their walks and an accessible emergency panic button that sends their location to the police. Comfort and security, every step of the way.</p>
+        <div class="shoe-tags">
+          <span class="tag">Women's safety</span>
+          <span class="tag">Bunion support</span>
+          <span class="tag">Emergency alert</span>
+          <span class="tag">Hands-free</span>
+        </div>
+      </div>
+
+      <div class="shoe-card">
+        <p class="shoe-card-num">Design 03</p>
+        <div class="carousel" id="carousel-bs">
+          <div class="carousel-track">
+            <img src="bs_1.jpg" alt="BioStride" class="carousel-img" />
+            <img src="bs_2.png" alt="BioStride — exploded view" class="carousel-img" />
+            <img src="bs_3.jpg" alt="BioStride — biodegradable materials" class="carousel-img" />
+            <img src="bs_4.jpg" alt="BioStride — worn" class="carousel-img" />
+          </div>
+          <button class="carousel-btn prev" onclick="moveCarousel('carousel-bs', -1)">&#8592;</button>
+          <button class="carousel-btn next" onclick="moveCarousel('carousel-bs', 1)">&#8594;</button>
+          <div class="carousel-dots" id="dots-bs">
+            <span class="dot active" onclick="goToSlide('carousel-bs', 0)"></span>
+            <span class="dot" onclick="goToSlide('carousel-bs', 1)"></span>
+            <span class="dot" onclick="goToSlide('carousel-bs', 2)"></span>
+            <span class="dot" onclick="goToSlide('carousel-bs', 3)"></span>
+          </div>
+        </div>
+        <h3 class="shoe-name">BioStride</h3>
+        <p class="shoe-slogan">Performs on the street. Belongs to the earth.</p>
+        <p class="shoe-desc">A 100% biodegradable shoe engineered from upcycled avocado peels and natural cork. Synthetic adhesives are eliminated entirely — assembly relies on natural jute, hemp fibers, and latex as a biological binder. Avocado skins provide a durable, flexible base rich in antimicrobial phenols; cork offers water resistance, shock absorption, and hypoallergenic comfort.</p>
+        <div class="shoe-tags">
+          <span class="tag">Biodegradable</span>
+          <span class="tag">Upcycled</span>
+          <span class="tag">Zero synthetics</span>
+          <span class="tag">Closed-loop</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section" id="team">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">The Designers</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="foto-simi.jpg" alt="Simi Joshi" class="team-photo" />
+        <p class="team-name">Simi Joshi</p>
+        <p class="team-role">Designer</p>
+        <p class="team-degree">Design Engineering</p>
+        <div class="social-links">
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">LinkedIn</a>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="foto-catherine.jpg" alt="Catherine Hynes" class="team-photo" />
+        <p class="team-name">Catherine Hynes</p>
+        <p class="team-role">Designer</p>
+        <p class="team-degree">Design Engineering</p>
+        <div class="social-links">
+          <a href="#" class="social-btn">Instagram</a>
+          <a href="#" class="social-btn">LinkedIn</a>
+        </div>
+      </div>
+      <div class="team-member">
+        <img src="foto-daniela.jpg" alt="Daniela Felix" class="team-photo" />
+        <p class="team-name">Daniela Felix</p>
+        <p class="team-role">Designer</p>
+        <p class="team-degree">Innovation Design Engineering</p>
+        <div class="social-links">
+          <a href="https://www.instagram.com/dfr_design/" target="_blank" class="social-btn">Instagram</a>
+          <a href="https://www.linkedin.com/in/danielafelixdesign" target="_blank" class="social-btn">LinkedIn</a>
+        </div>
+
+  <footer>
+    <span class="footer-name">Beyond Footwear</span>
+    <span class="footer-copy">Exhibition Road Festival 2026 · Daniela Felix, Catherine Hynes & Simi Joshi</span>
+  </footer>
+
+  <script>
+    const carouselState = {};
+
+    function moveCarousel(id, dir) {
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll('.carousel-img');
+      if (!carouselState[id]) carouselState[id] = 0;
+      carouselState[id] = (carouselState[id] + dir + imgs.length) % imgs.length;
+      updateCarousel(id, imgs.length);
+    }
+
+    function goToSlide(id, index) {
+      const carousel = document.getElementById(id);
+      const imgs = carousel.querySelectorAll('.carousel-img');
+      carouselState[id] = index;
+      updateCarousel(id, imgs.length);
+    }
+
+    function updateCarousel(id, total) {
+      const carousel = document.getElementById(id);
+      const track = carousel.querySelector('.carousel-track');
+      const dots = document.getElementById('dots-' + id.replace('carousel-', ''));
+      const idx = carouselState[id];
+      track.style.transform = `translateX(-${idx * 100}%)`;
+      if (dots) {
+        dots.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === idx));
+      }
+    }
+  </script>
+</body>
+</html>
